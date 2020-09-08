@@ -1,0 +1,16 @@
+
+server:
+  port: 8089
+
+
+#spring
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;DatabaseName=pps
+    password: root
+    username: sa
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#mybatis
+mybatis:
+  type-aliases-package: com.lsk.domain
+  mapper-locations: classpath:/mapper/*.xml

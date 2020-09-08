@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsk.mapper.ProjectsMapper">
+  <resultMap id="BaseResultMap" type="com.lsk.domain.Projects">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="project_name" jdbcType="VARCHAR" property="projectName" />
+    <result column="project_type" jdbcType="VARCHAR" property="projectType" />
+    <result column="project_charger" jdbcType="VARCHAR" property="projectCharger" />
+    <result column="project_level" jdbcType="VARCHAR" property="projectLevel" />
+    <result column="project_speed" jdbcType="FLOAT" property="projectSpeed" />
+  </resultMap>
+
+  <select id="selectAllProjects" parameterType="String" resultMap="BaseResultMap">
+    select
+        t2.id,t2.uid,t2.project_name,t2.project_charger,t2.project_level,t2.project_type,t2.project_speed
+    from
+        t_user t1,t_projects t2
+    where
+        t1.office=#{projectType} and t1.id=t2.uid
+  </select>
+
+  <update id="updateSpeed" parameterType="float">
+    update t_projects set project_speed=#{projectSpeed} where id=#{pid}
+  </update>
+
+  <insert id="addProject" parameterType="com.lsk.domain.Projects">
+    insert into t_projects
+        (uid, project_name, project_type, project_charger, project_level, project_speed)
+    values (#{uid},#{projectName},#{projectCharger},#{projectLevel},#{projectSpeed});
+  </insert>
+</mapper>

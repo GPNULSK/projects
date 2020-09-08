@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsk.mapper.ProjectDetaiMapper">
+  <resultMap id="BaseResultMap" type="com.lsk.domain.ProjectDetail">
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="p_description" jdbcType="VARCHAR" property="pDescription" />
+    <result column="p_speed" jdbcType="FLOAT" property="pSpeed" />
+    <result column="id" jdbcType="INTEGER" property="id" />
+  </resultMap>
+
+  <select id="selectProjectDetail" parameterType="integer" resultMap="BaseResultMap">
+    select
+        t1.id,t1.p_description,t1.p_speed from t_project_detail t1,t_projects t2
+    where t2.id=#{id} and t1.pid=#{id}
+  </select>
+
+  <insert id="addSpeed" parameterType="com.lsk.domain.ProjectDetail">
+    insert into t_project_detail
+        (pid,p_description,p_speed)
+    values
+        (#{pid},#{pDescription},#{pSpeed});
+  </insert>
+
+</mapper>
